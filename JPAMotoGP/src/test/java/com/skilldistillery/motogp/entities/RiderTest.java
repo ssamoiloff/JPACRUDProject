@@ -47,7 +47,17 @@ class RiderTest {
 		assertNotNull(rider);
 		assertEquals("Valentino", rider.getFirstName());
 		assertEquals("Rossi", rider.getLastName());
-		assertEquals("Yamaha", rider.getTeam());
+		assertEquals(41, rider.getAge());
+		assertEquals("Italy", rider.getCountry());
+		assertEquals("Monster Energy Yamaha", rider.getTeam());
+		assertEquals("YZR-M1", rider.getBike());
+		assertEquals(2000, rider.getFirstGPYear());
+		assertEquals(89, rider.getWins());
+		assertEquals(198, rider.getPodiums());
+		assertEquals(55, rider.getPoles());
+		assertEquals(76, rider.getRaceFastestLaps());
+		assertEquals(7, rider.getChampionships());
+		assertEquals(43, rider.getRiderNumber());
 	}
 
 }
