@@ -9,10 +9,9 @@ public interface RiderDAO {
 	public List<Rider> findByRiderNumber(int rn);
 	public List<Rider> findByFirstName(String fn);
 	public List<Rider> findByLastName(String ln);
-//	public List<Rider> findByTeam(String team);
 	public List<Rider> findByKeyword(String kw);
 	public List<Rider> findAll();
-	public Rider addRider(int id);
+	public Rider addRider(Rider rider);
 	public Rider editRider(int id);
 	public Rider deleteRider(int id);
 }

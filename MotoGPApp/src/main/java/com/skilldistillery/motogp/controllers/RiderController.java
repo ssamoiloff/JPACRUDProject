@@ -59,12 +59,6 @@ public class RiderController {
 		return "searchResultsPage";
 	}
 	
-//	@RequestMapping(path="findByTeam.do")
-//	public String findByTeam(@RequestParam String team, Model model) {
-//		List<Rider> riders = dao.findByTeam(team);
-//		model.addAttribute("rider", riders);
-//		return "searchResultsPage";
-//	}
 	
 	@RequestMapping(path="findByKeyword.do")
 	public String keywordSearch(@RequestParam String kw, Model model) {
@@ -78,6 +72,18 @@ public class RiderController {
 		List<Rider> riders = dao.findAll();
 		model.addAttribute("riders", riders);
 		return "index";
+	}
+	
+	@RequestMapping(path="createPage.do", method=RequestMethod.GET)
+	public String createPageRouting() {
+		return "createPage";
+	}
+	
+	@RequestMapping(path="addRider.do")
+	public String addRider(@RequestParam Rider rider, Model model) {
+		Rider newRider = dao.addRider(rider);
+		model.addAttribute(newRider);
+		return "createPage";
 	}
 	
 	@RequestMapping(path="navSearch.do")
