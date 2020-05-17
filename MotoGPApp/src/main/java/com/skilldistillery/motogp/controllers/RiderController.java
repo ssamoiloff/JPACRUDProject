@@ -125,7 +125,6 @@ public class RiderController {
 			System.out.println("Keyword string has errors");
 		}
 		model.addAttribute("riders", results);
-		System.out.println(numSearch);
 		return "searchResultsPage";
 	}
 }

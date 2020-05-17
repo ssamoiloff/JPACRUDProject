@@ -3,17 +3,17 @@
 <nav class="navbar">
 	<table class="navbar-nav">
 		<tr>
-	  <th class="nav-item"><a class="nav-link" href="home.do">Home</a></th>
-	  <th class="nav-item"><a class="nav-link" href="gridPage.do">2020 MotoGP Grid</a></th>
-	  <th class="nav-item"><a class="nav-link" href="createPage.do">Create Rider</a></th>
-	  <th class="nav-item"><a class="nav-link" href="editPage.do">Edit Rider Details</a></th>
-	  <th class="nav-item"><a class="nav-link" href="deletePage.do">Delete Rider</a></th>
+	  <td class="nav-item"><a class="nav-link" href="home.do">Home</a></td>
+	  <td class="nav-item"><a class="nav-link" href="gridPage.do">2020 MotoGP Grid</a></td>
+	  <td class="nav-item"><a class="nav-link" href="createPage.do">Create Rider</a></td>
+	  <td class="nav-item"><a class="nav-link" href="editPage.do">Edit Rider Details</a></td>
+	  <td class="nav-item"><a class="nav-link" href="deletePage.do">Delete Rider</a></td>
 		</tr>
 	</table>
 	<div class="search-container">
 	  <form action="navSearch.do">
-		<input type="text" name="search" placeholder="Search" />
-		<button type="submit">Submit</button>
+		<input type="text" name="search" placeholder="Search rider id, name, number, and team" />
+		<button type="submit">Search</button>
 	</form>
 	</div>
 </nav>
