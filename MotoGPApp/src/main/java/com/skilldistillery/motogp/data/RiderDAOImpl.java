@@ -23,15 +23,19 @@ public class RiderDAOImpl implements RiderDAO {
 	}
 
 	@Override
-	public Rider findByRiderNumber(Integer rn) {
-		// TODO Auto-generated method stub
-		return null;
+	public Rider findByRiderNumber(int rn) {
+		String jpql = "SELECT r FROM Rider r WHERE r.riderNumber = :number";
+		Rider rider = em.createQuery(jpql, Rider.class).setParameter("number", rn)
+						.getSingleResult();
+		return rider;
 	}
 
 	@Override
 	public Rider findByFirstName(String fn) {
-		// TODO Auto-generated method stub
-		return null;
+		String jpql = "SELECT r FROM Rider r WHERE r.firstName LIKE '%:name%'";
+		Rider rider = em.createQuery(jpql, Rider.class).setParameter("name", fn)
+				.getSingleResult();
+		return rider;
 	}
 
 	@Override
@@ -39,7 +43,7 @@ public class RiderDAOImpl implements RiderDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
 	@Override
 	public List<Rider> findByTeam(String team) {
 		// TODO Auto-generated method stub
@@ -47,9 +51,16 @@ public class RiderDAOImpl implements RiderDAO {
 	}
 
 	@Override
-	public List<Rider> findAll() {
-		// TODO Auto-generated method stub
+	public List<Rider> findByKeyword(String keyword) {
+		// TODO SEARCH BY FIRST NAME, LAST NAME, TEAM
 		return null;
+	}
+
+	@Override
+	public List<Rider> findAll() {
+		String jpql = "SELECT r from Rider r";
+		List<Rider> riders = em.createQuery(jpql, Rider.class).getResultList();
+		return riders;
 	}
 
 	@Override
@@ -69,5 +80,4 @@ public class RiderDAOImpl implements RiderDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 }
