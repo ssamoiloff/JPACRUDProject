@@ -13,6 +13,7 @@ import com.skilldistillery.motogp.entities.Rider;
 @Service
 @Transactional
 public class RiderDAOImpl implements RiderDAO {
+	private String qPrefix = "SELECT r FROM Rider r ";
 	
 	@PersistenceContext
 	private EntityManager em;
@@ -23,42 +24,50 @@ public class RiderDAOImpl implements RiderDAO {
 	}
 
 	@Override
-	public Rider findByRiderNumber(int rn) {
-		String jpql = "SELECT r FROM Rider r WHERE r.riderNumber = :number";
-		Rider rider = em.createQuery(jpql, Rider.class).setParameter("number", rn)
-						.getSingleResult();
-		return rider;
+	public List<Rider> findByRiderNumber(int rn) {
+		String jpql = qPrefix + "WHERE r.riderNumber = :number";
+		List<Rider> riders = em.createQuery(jpql, Rider.class)
+				.setParameter("number", rn)
+				.getResultList();
+		return riders;
 	}
 
 	@Override
-	public Rider findByFirstName(String fn) {
-		String jpql = "SELECT r FROM Rider r WHERE r.firstName LIKE '%:name%'";
-		Rider rider = em.createQuery(jpql, Rider.class).setParameter("name", fn)
-				.getSingleResult();
-		return rider;
+	public List<Rider> findByFirstName(String fn) {
+		String jpql = qPrefix + "WHERE r.firstName LIKE '"+"%"+fn+"%'";
+		List<Rider> riders = em.createQuery(jpql, Rider.class)
+				.getResultList();
+		return riders;
 	}
 
 	@Override
-	public Rider findByLastName(String ln) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Rider> findByLastName(String ln) {
+		String jpql = qPrefix + "WHERE r.firstName LIKE '"+"%"+ln+"%'";
+		List<Rider> riders = em.createQuery(jpql, Rider.class)
+				.getResultList();
+		return riders;
 	}
 	
-	@Override
-	public List<Rider> findByTeam(String team) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	@Override
+//	public List<Rider> findByTeam(String team) {
+//		String jpql = qPrefix + "WHERE r.team LIKE '"+"%"+team+"%'";
+//		List<Rider> riders = em.createQuery(jpql, Rider.class)
+//				.getResultList();
+//		return riders;
+//	}
 
 	@Override
-	public List<Rider> findByKeyword(String keyword) {
-		// TODO SEARCH BY FIRST NAME, LAST NAME, TEAM
-		return null;
+	public List<Rider> findByKeyword(String kw) {
+		String jpql = qPrefix + "WHERE r.firstName LIKE '"+"%"+kw+"%' OR "
+				+ "r.lastName LIKE '"+"%"+kw+"%' OR r.team LIKE '"+"%"+kw+"%'";
+		List<Rider> riders = em.createQuery(jpql, Rider.class)
+				.getResultList();
+		return riders;
 	}
 
 	@Override
 	public List<Rider> findAll() {
-		String jpql = "SELECT r from Rider r";
+		String jpql = qPrefix;
 		List<Rider> riders = em.createQuery(jpql, Rider.class).getResultList();
 		return riders;
 	}

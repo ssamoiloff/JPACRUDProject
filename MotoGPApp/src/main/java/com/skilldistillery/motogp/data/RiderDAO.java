@@ -6,11 +6,11 @@ import com.skilldistillery.motogp.entities.Rider;
 
 public interface RiderDAO {
 	public Rider findById(int id);
-	public Rider findByRiderNumber(int rn);
-	public Rider findByFirstName(String fn);
-	public Rider findByLastName(String ln);
-	public List<Rider> findByTeam(String team);
-	public List<Rider> findByKeyword(String keyword);
+	public List<Rider> findByRiderNumber(int rn);
+	public List<Rider> findByFirstName(String fn);
+	public List<Rider> findByLastName(String ln);
+//	public List<Rider> findByTeam(String team);
+	public List<Rider> findByKeyword(String kw);
 	public List<Rider> findAll();
 	public Rider addRider(int id);
 	public Rider editRider(int id);

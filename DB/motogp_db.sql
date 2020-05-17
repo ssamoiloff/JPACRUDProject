@@ -54,7 +54,7 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `motogp_db`;
-INSERT INTO `rider` (`id`, `first_name`, `last_name`, `age`, `country`, `team`, `bike`, `first_gp_year`, `wins`, `podiums`, `poles`, `race_fastest_laps`, `championships`, `rider_number`) VALUES (1, 'Valentino', 'Rossi', 41, 'Italy', 'Monster Energy Yamaha', 'YZR-M1', 2000, 89, 198, 55, 76, 7, 43);
+INSERT INTO `rider` (`id`, `first_name`, `last_name`, `age`, `country`, `team`, `bike`, `first_gp_year`, `wins`, `podiums`, `poles`, `race_fastest_laps`, `championships`, `rider_number`) VALUES (1, 'Valentino', 'Rossi', 41, 'Italy', 'Monster Energy Yamaha', 'YZR-M1', 2000, 89, 198, 55, 76, 7, 46);
 INSERT INTO `rider` (`id`, `first_name`, `last_name`, `age`, `country`, `team`, `bike`, `first_gp_year`, `wins`, `podiums`, `poles`, `race_fastest_laps`, `championships`, `rider_number`) VALUES (2, 'Marc', 'Marquez', 27, 'Spain', 'Repsol Honda', 'RC213V', 2013, 56, 95, 62, 56, 6, 93);
 INSERT INTO `rider` (`id`, `first_name`, `last_name`, `age`, `country`, `team`, `bike`, `first_gp_year`, `wins`, `podiums`, `poles`, `race_fastest_laps`, `championships`, `rider_number`) VALUES (3, 'Andrea', 'Dovizioso', 34, 'Italy', 'Ducati Corse', 'Desmosedici GP', 2008, 14, 60, 7, 11, 0, 4);
 INSERT INTO `rider` (`id`, `first_name`, `last_name`, `age`, `country`, `team`, `bike`, `first_gp_year`, `wins`, `podiums`, `poles`, `race_fastest_laps`, `championships`, `rider_number`) VALUES (4, 'Alex', 'Rins', 24, 'Spain', 'Suzuki Ecstar', 'GSX-RR MotoGP', 2017, 2, 8, 0, 2, 0, 42);

@@ -33,9 +33,44 @@ public class RiderController {
 	
 	@RequestMapping(path="findById.do")
 	public String findRider(@RequestParam Integer gid, Model model) {
-		Rider r = dao.findById(gid);
-		model.addAttribute("rider", r);
+		Rider rider = dao.findById(gid);
+		model.addAttribute("rider", rider);
 		return "riderDetails";
+	}
+	
+	@RequestMapping(path="findByRiderNumber.do")
+	public String findByRiderNumber(@RequestParam int rn, Model model) {
+		List<Rider> riders = dao.findByRiderNumber(rn);
+		model.addAttribute("riders", riders);
+		return "searchResultsPage";
+	}
+	
+	@RequestMapping(path="findByFirstName.do")
+	public String findByFirstName(@RequestParam String fn, Model model) {
+		List<Rider> riders = dao.findByFirstName(fn);
+		model.addAttribute("riders", riders);
+		return "searchResultsPage";
+	}
+	
+	@RequestMapping(path="findByLastName.do")
+	public String findByLastName(@RequestParam String ln, Model model) {
+		List<Rider> riders = dao.findByLastName(ln);
+		model.addAttribute("riders", riders);
+		return "searchResultsPage";
+	}
+	
+//	@RequestMapping(path="findByTeam.do")
+//	public String findByTeam(@RequestParam String team, Model model) {
+//		List<Rider> riders = dao.findByTeam(team);
+//		model.addAttribute("rider", riders);
+//		return "searchResultsPage";
+//	}
+	
+	@RequestMapping(path="findByKeyword.do")
+	public String keywordSearch(@RequestParam String kw, Model model) {
+		List<Rider> riders = dao.findByKeyword(kw);
+		model.addAttribute("riders", riders);
+		return "searchResultsPage";
 	}
 	
 	@RequestMapping(path="allRiders.do")
@@ -45,24 +80,33 @@ public class RiderController {
 		return "index";
 	}
 	
-	@RequestMapping(path="findByFirstName.do")
-	public String findByFirstName(String name, Model model) {
-		Rider r = dao.findByFirstName(name);
-		model.addAttribute("rider", r);
-		return "riderDetails";
-	}
-	
-	@RequestMapping(path="searchResults")
-	public String searchBarAction(@RequestParam String search, Model model) {
-		List<Rider> riderResults = new ArrayList<>();
+	@RequestMapping(path="navSearch.do")
+	public String navSearchAction(@RequestParam String search, Model model) {
+		List<Rider> results = new ArrayList<>();
 		int numSearch = 0;
 		
-		if (search.matches("\\d")) {
+		if (search.matches("\\d+")) {
 			try {
 				numSearch = Integer.parseInt(search);
 				if (numSearch > 0) {
-					Rider riderById = dao.findById(numSearch);
-					riderResults.add(riderById);
+					try {
+						Rider riderById = dao.findById(numSearch);
+						if (riderById != null) {
+							results.add(riderById);
+						}
+					} catch (Exception e) {
+						e.printStackTrace();
+						System.out.println("Search did not match any id values");
+					}
+					try {
+						List<Rider> riderByRaceNum = dao.findByRiderNumber(numSearch);
+						for (Rider rider : riderByRaceNum) {
+							results.add(rider);
+						}
+					} catch (Exception e) {
+						e.printStackTrace();
+						System.out.println("Search did not match any riderNumber values");
+					}
 				} else {
 					System.out.println("Search was 0");
 				}
@@ -71,9 +115,17 @@ public class RiderController {
 				System.out.println("Search was not an integer");
 			}
 		}
-		
-		
-		model.addAttribute("riderResults", riderResults);
-		return "searchResults";
+		try {
+			List<Rider> riderByKWResults = dao.findByKeyword(search);
+			for (Rider rider : riderByKWResults) {
+				results.add(rider);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Keyword string has errors");
+		}
+		model.addAttribute("riders", results);
+		System.out.println(numSearch);
+		return "searchResultsPage";
 	}
 }
