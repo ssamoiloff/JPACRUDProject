@@ -23,7 +23,7 @@
 					<button type="submit">Edit</button>
 				</div>
 			</form>
-			<br><br>
+			<br>
 		</c:forEach>
 
 	</main>

@@ -86,7 +86,9 @@
 			<br>
 		</div>
 
-		<input button type="button" type="submit" value="Update" />
+		<div class="btn-block">
+				<button type="submit">Submit</button>
+			</div>
 	</form>
 
 	<jsp:include page="bootstrapFoot.jsp" />
