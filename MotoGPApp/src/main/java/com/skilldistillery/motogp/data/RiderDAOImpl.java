@@ -64,43 +64,40 @@ public class RiderDAOImpl implements RiderDAO {
 		List<Rider> riders = em.createQuery(jpql, Rider.class).getResultList();
 		return riders;
 	}
-
+	
 	@Override
 	public Rider addRider(Rider rider) {
-		String jpql = "INSERT INTO Rider r (r.firstName, r.lastName, r.age, r.country, "
-				+ "r.team, r.bike, r.firstGPYear, r.wins, r.podiums, r.poles, r.raceFastestLaps, "
-				+ "r.championships, r.riderNumber) "
-				+ "VALUES (:fn, :ln, :age, :country, :team, :bike, :fGPYear, :wins, :podiums, "
-				+ ":poles, :rFLaps, :champs, :rNum";
-		Rider newRider = em.createQuery(jpql, Rider.class)
-				.setParameter("fn", rider.getFirstName())
-				.setParameter("ln", rider.getLastName())
-				.setParameter("age", rider.getAge())
-				.setParameter("country", rider.getCountry())
-				.setParameter("team", rider.getTeam())
-				.setParameter("bike", rider.getBike())
-				.setParameter("fGPYear", rider.getFirstGPYear())
-				.setParameter("wins", rider.getWins())
-				.setParameter("podiums", rider.getPodiums())
-				.setParameter("poles", rider.getPoles())
-				.setParameter("rFLaps", rider.getRaceFastestLaps())
-				.setParameter("champs", rider.getChampionships())
-				.setParameter("rNum", rider.getRiderNumber())
-				.getSingleResult();
-		em.persist(newRider);
+		em.persist(rider);
 		em.flush();
-		return newRider;
+		return rider;
 	}
 
 	@Override
-	public Rider editRider(int id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Rider editRider(Rider rider) {
+		Rider manRider = em.find(Rider.class, rider.getId());
+		manRider.setFirstName(rider.getFirstName());
+		manRider.setLastName(rider.getLastName());
+		manRider.setAge(rider.getAge());
+		manRider.setCountry(rider.getCountry());
+		manRider.setTeam(rider.getTeam());
+		manRider.setBike(rider.getBike());
+		manRider.setFirstGPYear(rider.getFirstGPYear());
+		manRider.setWins(rider.getWins());
+		manRider.setPodiums(rider.getPodiums());
+		manRider.setPoles(rider.getPoles());
+		manRider.setRaceFastestLaps(rider.getRaceFastestLaps());
+		manRider.setChampionships(rider.getChampionships());
+		manRider.setRiderNumber(rider.getRiderNumber());
+		em.persist(manRider);
+		em.flush();
+		return manRider;
 	}
 
 	@Override
 	public Rider deleteRider(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		Rider rmRider = em.find(Rider.class, id);
+		em.remove(rmRider);
+		em.flush();
+		return rmRider;
 	}
 }

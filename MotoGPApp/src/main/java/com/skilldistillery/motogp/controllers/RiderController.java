@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.skilldistillery.motogp.data.RiderDAO;
 import com.skilldistillery.motogp.entities.Rider;
@@ -59,7 +60,6 @@ public class RiderController {
 		return "searchResultsPage";
 	}
 	
-	
 	@RequestMapping(path="findByKeyword.do")
 	public String keywordSearch(@RequestParam String kw, Model model) {
 		List<Rider> riders = dao.findByKeyword(kw);
@@ -80,10 +80,74 @@ public class RiderController {
 	}
 	
 	@RequestMapping(path="addRider.do")
-	public String addRider(@RequestParam Rider rider, Model model) {
+	public String addRider(Rider rider, RedirectAttributes redir) {
 		Rider newRider = dao.addRider(rider);
-		model.addAttribute(newRider);
-		return "createPage";
+		redir.addFlashAttribute("rider", newRider);
+		return "redirect:riderCreated.do";
+	}
+	
+	@RequestMapping(path="riderCreated.do")
+	public String createdRedir() {
+		return "riderDetails";
+	}
+	
+	@RequestMapping(path="editSelectionPage.do")
+	public String editSelectionPageRouting(Model model) {
+		List<Rider> riders = dao.findAll();
+		model.addAttribute("riders", riders);
+		return "editSelectionPage";
+	}
+	
+	@RequestMapping(path="editRider.do")
+	public String editPage(@RequestParam int id, Model model) {
+		Rider rider = dao.findById(id);
+		model.addAttribute("rider", rider);
+		return "editPage";
+	}
+	
+	@RequestMapping(path="submitEdit.do")
+	public String editRouting(Rider rider, RedirectAttributes redir) {
+		Rider manRider = dao.editRider(rider);
+		redir.addFlashAttribute("rider", manRider);
+		return "redirect:riderEdited.do";
+	}
+	
+	@RequestMapping(path="riderEdited.do")
+	public String editedRedir() {
+		return "editedDetails";
+	}
+	
+	@RequestMapping(path="deletePage.do")
+	public String deletePageRouting(Model model) {
+		List<Rider> riders = dao.findAll();
+		model.addAttribute("riders", riders);
+		return "deletePage";
+	}
+	
+	@RequestMapping(path="deleteRider.do")
+	public String deleteRider(@RequestParam("list") int[] ids, RedirectAttributes redir) {
+		List<Rider> delRiders = new ArrayList<>();
+		boolean greaterThanOne = false;
+		if (ids.length > 0) {
+			for (int id : ids) {
+				delRiders.add(dao.deleteRider(id));
+			}
+			if (delRiders.size() == 1) {
+				greaterThanOne = false;
+				redir.addFlashAttribute("gto", greaterThanOne);
+			}
+			else if (delRiders.size() > 1) {
+				greaterThanOne = true;
+				redir.addFlashAttribute("gto", greaterThanOne);
+			}
+		}
+		redir.addFlashAttribute("riders", delRiders);
+		return "redirect:riderDeleted.do";
+	}
+	
+	@RequestMapping(path="riderDeleted.do")
+	public String deletedRedir() {
+		return "deletedDetails";
 	}
 	
 	@RequestMapping(path="navSearch.do")

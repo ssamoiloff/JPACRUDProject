@@ -5,19 +5,19 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Rider Details</title>
+<title>Edited Rider Details</title>
 <jsp:include page="bootstrapHead.jsp" />
 </head>
 <body>
 	<jsp:include page="navbar.jsp" />
-	
+
 	<c:if test="${not empty rider}">
-	<div class="alert alert-success" role="alert">Rider successfully created!</div>
+	<div class="alert alert-success" role="alert">Rider successfully updated!</div>
 	</c:if>
 	<c:if test="${empty rider}">
-	<div class="alert alert-danger" role="alert">Rider could not be created!</div>
+	<div class="alert alert-danger" role="alert">Rider could not be updated!</div>
 	</c:if>
-	
+
 	<main class="container-fluid">
 		<table class="table">
 			<thead class="thead thead-dark">

@@ -6,7 +6,7 @@
 	  <td class="nav-item"><a class="nav-link" href="home.do">Home</a></td>
 	  <td class="nav-item"><a class="nav-link" href="gridPage.do">2020 MotoGP Grid</a></td>
 	  <td class="nav-item"><a class="nav-link" href="createPage.do">Create Rider</a></td>
-	  <td class="nav-item"><a class="nav-link" href="editPage.do">Edit Rider Details</a></td>
+	  <td class="nav-item"><a class="nav-link" href="editSelectionPage.do">Edit Rider Details</a></td>
 	  <td class="nav-item"><a class="nav-link" href="deletePage.do">Delete Rider</a></td>
 		</tr>
 	</table>
