@@ -7,31 +7,12 @@
 <meta charset="UTF-8">
 <title>Home</title>
 <jsp:include page="bootstrapHead.jsp" />
-<!-- XXX -->
+<link href="css/style.css" type="text/css" rel="stylesheet">
 </head>
 <body>
-	<jsp:include page="navbar.jsp" />
-	<!-- XXX -->
-	<main class="container-fluid">
+<jsp:include page="navbar.jsp" />   
+  
 
-		<div class="homepage-search">
-			<form action="findByRiderNumber.do">
-				<input type="text" name="rn" placeholder="Search by rider's race number" />
-				<button type="submit">Submit</button>
-			</form>
-			<br><br>
-			<form action="findByFirstName.do">
-				<input type="text" name="fn" placeholder="Search by first name" />
-				<button type="submit">Submit</button>
-			</form>
-			<br><br>
-			<form action="findByKeyword.do">
-				<input type="text" name="kw" placeholder="Search by keyword" />
-				<button type="submit">Submit</button>
-			</form>
-		</div>
-	</main>
-	<jsp:include page="bootstrapFoot.jsp" />
-	<!-- XXX -->
+<jsp:include page="bootstrapFoot.jsp" />
 </body>
 </html>
